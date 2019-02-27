@@ -7,7 +7,6 @@ class PlotGraph:
         self.x_label = x_label
         self.y_label = y_label
     
-    def drawFigure(self, data, format):
-        
+    def draw(self, data, format="bo"):
         plt.plot(data, format)
         plt.show()
