@@ -1,6 +1,7 @@
 # Python
-.venv
+.pji
 __pycache__
+*.pyc
 
 # Visual Studio Code
 .vscode/
