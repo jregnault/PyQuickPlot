@@ -8,7 +8,7 @@ if __name__ == "__main__":
     parser.add_argument('-p','--plot', help='Create a plot figure', action='store_true', default=False)
     parser.add_argument('integers', help='a list of integers to plot', type=int, nargs='+')
     parser.add_argument('-f','--format', help="data representation with MATLAB syntax", default="")
-    parser.add_argument('-t','--title', help='set the title of the figure', default="figure")
+    parser.add_argument('-t','--title', help='set the title of the figure', default="")
 
     args = parser.parse_args()
     if(args.verbose):
