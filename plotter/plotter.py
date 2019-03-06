@@ -9,6 +9,8 @@ if __name__ == "__main__":
     parser.add_argument('integers', help='a list of integers to plot', type=int, nargs='+')
     parser.add_argument('-f','--format', help="data representation with MATLAB syntax", default="")
     parser.add_argument('-t','--title', help='set the title of the figure', default="")
+    parser.add_argument('--xlabel', help='set the x axis label in the figure', default="")
+    parser.add_argument('--ylabel', help='set the y axis label in the figure', default="")
 
     args = parser.parse_args()
     if(args.verbose):
@@ -19,7 +21,7 @@ if __name__ == "__main__":
     if(args.verbose):
         print("Checking graph type")
     if(args.plot):
-        plot = PlotGraph.PlotGraph(args.title)
+        plot = PlotGraph.PlotGraph(args.title, args.xlabel, args.ylabel)
         if(args.format != ""):
             plot.draw(args.integers, args.format)
         else:
