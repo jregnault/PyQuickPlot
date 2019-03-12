@@ -1,5 +1,6 @@
 install:
-	pip3 install -r requirements.txt
+	pip3 install --user --upgrade pip
+	pip3 install --user -r requirements.txt
 
 test:
 	pytest
