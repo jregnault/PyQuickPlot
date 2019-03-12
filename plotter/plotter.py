@@ -8,10 +8,12 @@ if __name__ == "__main__":
     parser.add_argument('-v','--verbose', help='show more information about the execution.', action='store_true', default=False)
 
     # Graphs types
-    parser.add_argument('-p','--plot', help='Create a plot figure', action='store_true', default=False)
+    graphGroup = parser.add_mutually_exclusive_group()
+    graphGroup.add_argument('-p','--plot', help='Create a plot figure', action='store_true', default=False)
 
     # Input options
-    parser.add_argument('integers', help='a list of integers to plot', type=int, nargs='+')
+    # parser.add_argument('integers', help='a list of integers to plot', type=int, nargs='+')
+    parser.add_argument('--csv', help='input and parse a csv file using the separator', nargs=2, metavar=('CSVFILE','SEPARATOR'))
 
     # Customization options
     parser.add_argument('-f','--format', help="data representation with MATLAB syntax", default="")
@@ -35,5 +37,5 @@ if __name__ == "__main__":
             plot.draw(args.integers, args.format)
         else:
             plot.draw(args.integers)
-    if(verbose):
+    if(args.verbose):
         print("Closing.")
