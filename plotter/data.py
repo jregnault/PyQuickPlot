@@ -2,12 +2,8 @@
 # Jérémie Regnault
 
 import csv
-import numpy as np
+import pandas as pd
 
 def importFromCSV(filename,separator):
-    data = np.empty([1,1])
-    with open(filename, 'rb') as csvfile:
-        reader = csv.reader(csvfile, delimiter=separator)
-        for l in reader:
-            np.reshape(data,[len(data),len(l)])
-            np.append(data, np.asarray(l))
+    return pd.read_csv(filename,separator)
+            
