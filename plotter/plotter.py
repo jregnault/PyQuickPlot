@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     # Input options
     # parser.add_argument('integers', help='a list of integers to plot', type=int, nargs='+')
-    parser.add_argument('--csv', help='input and parse a csv file using the separator', nargs=2, metavar=('CSVFILE','SEPARATOR'), default=("",""))
+    parser.add_argument('--csv', help='input and parse a csv file using the separator', nargs=2, metavar=('CSVFILE','SEPARATOR'), default=("",","))
 
     # Customization options
     parser.add_argument('-f','--format', help="data representation with MATLAB syntax", default="")
@@ -31,8 +31,7 @@ if __name__ == "__main__":
     if args.csv[0] != "":
         if args.verbose:
             print("Parsing CSV file")
-            dataframe = data.importFromCSV(args.csv[0],args.csv[1])
-            data = dataframe.values
+        dataX, dataY = data.importFromCSV(args.csv[0],args.csv[1])
     else:
         data = args.integers
 
@@ -45,6 +44,6 @@ if __name__ == "__main__":
         if(args.format != ""):
             plot.draw(data, args.format)
         else:
-            plot.draw(data)
+            plot.draw(dataX, dataY)
     if(args.verbose):
         print("Closing.")
