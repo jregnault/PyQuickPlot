@@ -3,6 +3,7 @@ import PlotGraph
 import data
 
 if __name__ == "__main__":
+    # Parser creation
     parser = argparse.ArgumentParser(description="Create a figure from raw data.")
 
     # General options
@@ -25,7 +26,10 @@ if __name__ == "__main__":
     parser.add_argument('--xlabel', help='set the x axis label in the figure', default="")
     parser.add_argument('--ylabel', help='set the y axis label in the figure', default="")
 
+    # Options parsing
     args = parser.parse_args()
+
+    # Processing
     if(args.verbose):
         print("Verbose mode activated.")
         params = vars(args)
