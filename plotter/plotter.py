@@ -1,5 +1,6 @@
 import argparse
 import PlotGraph
+import data
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Create a figure from raw data.")
@@ -8,10 +9,15 @@ if __name__ == "__main__":
     parser.add_argument('-v','--verbose', help='show more information about the execution.', action='store_true', default=False)
 
     # Graphs types
-    parser.add_argument('-p','--plot', help='Create a plot figure', action='store_true', default=False)
+    graphGroup = parser.add_mutually_exclusive_group()
+    graphGroup.add_argument('-p','--plot', help='Create a plot figure', action='store_true', default=False)
 
     # Input options
     parser.add_argument('integers', help='a list of integers to plot', type=int, nargs='+')
+    parser.add_argument('--csv', help='input and parse a csv file using the separator', nargs=2, metavar=('CSVFILE','SEPARATOR'), default=("",","))
+
+    # Output options
+    parser.add_argument('-o', '--output', help='Save the figure in the given file. The extension defines the encoding used.', default="")
 
     # Customization options
     parser.add_argument('-f','--format', help="data representation with MATLAB syntax", default="")
@@ -25,6 +31,13 @@ if __name__ == "__main__":
         params = vars(args)
         print(params)
 
+    if args.csv[0] != "":
+        if args.verbose:
+            print("Parsing CSV file")
+        dataX, dataY = data.importFromCSV(args.csv[0],args.csv[1])
+    else:
+        data = args.integers
+
     if(args.verbose):
         print("Checking graph type")
     if(args.plot):
@@ -32,8 +45,11 @@ if __name__ == "__main__":
         if(args.verbose):
             print("Drawing figure.")
         if(args.format != ""):
-            plot.draw(args.integers, args.format)
+            if(args.output == ""):
+                plot.draw(data, args.format)
+            else:
+                plot.draw(data, args.format, args.output)
         else:
-            plot.draw(args.integers)
-    if(verbose):
+            plot.draw(dataX, dataY)
+    if(args.verbose):
         print("Closing.")
