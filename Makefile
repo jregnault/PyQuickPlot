@@ -12,4 +12,4 @@ virtualenv:
 test:
 	pytest
 
-.PHONY: install test
+.PHONY: install userInstall test

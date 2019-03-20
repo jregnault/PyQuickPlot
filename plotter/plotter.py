@@ -13,8 +13,11 @@ if __name__ == "__main__":
     graphGroup.add_argument('-p','--plot', help='Create a plot figure', action='store_true', default=False)
 
     # Input options
-    # parser.add_argument('integers', help='a list of integers to plot', type=int, nargs='+')
+    parser.add_argument('integers', help='a list of integers to plot', type=int, nargs='+')
     parser.add_argument('--csv', help='input and parse a csv file using the separator', nargs=2, metavar=('CSVFILE','SEPARATOR'), default=("",","))
+
+    # Output options
+    parser.add_argument('-o', '--output', help='Save the figure in the given file. The extension defines the encoding used.', default="")
 
     # Customization options
     parser.add_argument('-f','--format', help="data representation with MATLAB syntax", default="")
@@ -42,7 +45,10 @@ if __name__ == "__main__":
         if(args.verbose):
             print("Drawing figure.")
         if(args.format != ""):
-            plot.draw(data, args.format)
+            if(args.output == ""):
+                plot.draw(data, args.format)
+            else:
+                plot.draw(data, args.format, args.output)
         else:
             plot.draw(dataX, dataY)
     if(args.verbose):
