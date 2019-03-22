@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import pandas as pd
 
 class PlotGraph:
 
@@ -8,17 +9,11 @@ class PlotGraph:
         self.y_label = y_label
 
     def draw(self, data, format="", output=""):
-        plt.plot(data, format)
+        if data.ndim == 1:
+            plt.plot(data.get_values(), format)
         plt.title(self.title)
         plt.xlabel(self.x_label)
         plt.ylabel(self.y_label)
         plt.show()
         if output != "":
             plt.savefig(output)
-    
-    def draw(self, dataX, dataY, format=""):
-        plt.plot(dataX, dataY, format)
-        plt.title(self.title)
-        plt.xlabel(self.x_label)
-        plt.ylabel(self.y_label)
-        plt.show()

@@ -1,4 +1,5 @@
 import argparse
+import pandas as pd
 import PlotGraph
 import data
 
@@ -40,7 +41,7 @@ if __name__ == "__main__":
             print("Parsing CSV file")
         dataX, dataY = data.importFromCSV(args.csv[0],args.csv[1])
     else:
-        data = args.integers
+        data = pd.DataFrame(args.integers)
 
     if(args.verbose):
         print("Checking graph type")
@@ -48,12 +49,6 @@ if __name__ == "__main__":
         plot = PlotGraph.PlotGraph(args.title, args.xlabel, args.ylabel)
         if(args.verbose):
             print("Drawing figure.")
-        if(args.format != ""):
-            if(args.output == ""):
-                plot.draw(data, args.format)
-            else:
-                plot.draw(data, args.format, args.output)
-        else:
-            plot.draw(dataX, dataY)
+        plot.draw(data, args.format, args.output)
     if(args.verbose):
         print("Closing.")
