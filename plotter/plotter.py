@@ -1,6 +1,6 @@
 import argparse
 import PlotGraph
-import data
+import dataHandler
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Create a figure from raw data.")
@@ -13,7 +13,7 @@ if __name__ == "__main__":
     graphGroup.add_argument('-p','--plot', help='Create a plot figure', action='store_true', default=False)
 
     # Input options
-    parser.add_argument('integers', help='a list of integers to plot', type=int, nargs='+')
+    #parser.add_argument('integers', help='a list of integers to plot', type=int, nargs='+')
     parser.add_argument('--csv', help='input and parse a csv file using the separator', nargs=2, metavar=('CSVFILE','SEPARATOR'), default=("",","))
 
     # Output options
@@ -25,31 +25,31 @@ if __name__ == "__main__":
     parser.add_argument('--xlabel', help='set the x axis label in the figure', default="")
     parser.add_argument('--ylabel', help='set the y axis label in the figure', default="")
 
+    # Parsing command line
     args = parser.parse_args()
+    # Verbose activation
     if(args.verbose):
         print("Verbose mode activated.")
         params = vars(args)
         print(params)
 
+    # input retrieve
     if args.csv[0] != "":
         if args.verbose:
             print("Parsing CSV file")
-        dataX, dataY = data.importFromCSV(args.csv[0],args.csv[1])
+        data = dataHandler.importFromCSV(args.csv[0],args.csv[1])
     else:
         data = args.integers
 
+    # figure creation
     if(args.verbose):
         print("Checking graph type")
     if(args.plot):
         plot = PlotGraph.PlotGraph(args.title, args.xlabel, args.ylabel)
         if(args.verbose):
             print("Drawing figure.")
-        if(args.format != ""):
-            if(args.output == ""):
-                plot.draw(data, args.format)
-            else:
-                plot.draw(data, args.format, args.output)
-        else:
-            plot.draw(dataX, dataY)
+        plot.draw(data, args.format, args.output)
+
+    # end of analysis, closing
     if(args.verbose):
         print("Closing.")

@@ -15,10 +15,3 @@ class PlotGraph:
         plt.show()
         if output != "":
             plt.savefig(output)
-    
-    def draw(self, dataX, dataY, format=""):
-        plt.plot(dataX, dataY, format)
-        plt.title(self.title)
-        plt.xlabel(self.x_label)
-        plt.ylabel(self.y_label)
-        plt.show()
