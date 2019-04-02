@@ -14,6 +14,7 @@ class PlotGraph:
         plt.title(self.title)
         plt.xlabel(self.x_label)
         plt.ylabel(self.y_label)
-        plt.show()
         if output != "":
             plt.savefig(output)
+        else:
+            plt.show()

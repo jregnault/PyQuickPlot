@@ -1,5 +1,4 @@
 import argparse
-import pandas as pd
 import PlotGraph
 import dataHandler
 
@@ -9,17 +8,14 @@ if __name__ == "__main__":
 
     # General options
     parser.add_argument('-v','--verbose', help='show more information about the execution.', action='store_true', default=False)
+    parser.add_argument('-s', '--save', help='Save the figure in the given file. The extension defines the encoding used.', default="")
 
     # Graphs types
-    graphGroup = parser.add_mutually_exclusive_group()
-    graphGroup.add_argument('-p','--plot', help='Create a plot figure', action='store_true', default=False)
+    parser.add_argument('-p','--plot', help='Create a plot figure', action='store_true', default=False)
 
     # Input options
     #parser.add_argument('integers', help='a list of integers to plot', type=int, nargs='+')
     parser.add_argument('--csv', help='input and parse a csv file using the separator', nargs=2, metavar=('CSVFILE','SEPARATOR'), default=("",","))
-
-    # Output options
-    parser.add_argument('-o', '--output', help='Save the figure in the given file. The extension defines the encoding used.', default="")
 
     # Customization options
     parser.add_argument('-f','--format', help="data representation with MATLAB syntax", default="")
@@ -27,20 +23,21 @@ if __name__ == "__main__":
     parser.add_argument('--xlabel', help='set the x axis label in the figure', default="")
     parser.add_argument('--ylabel', help='set the y axis label in the figure', default="")
 
+    args = parser.parse_args()
+
     # input retrieve
-        if args.verbose:
-            print("Parsing CSV file")
+    if args.verbose:
+        print("Parsing CSV file")
+    if args.csv[0] != "":
         data = dataHandler.importFromCSV(args.csv[0],args.csv[1])
-    else:
-        data = pd.DataFrame(args.integers)
 
     # figure creation
     if(args.verbose):
         print("Checking graph type")
     if(args.plot):
-        plot = PlotGraph.PlotGraph(args.title, args.xlabel, args.ylabel)
+        fig = PlotGraph.PlotGraph(args.title, args.xlabel, args.ylabel)
         if(args.verbose):
             print("Drawing figure.")
-        plot.draw(data, args.format, args.output)
+        fig.draw(data, args.format, args.save)
     if(args.verbose):
         print("Closing.")
