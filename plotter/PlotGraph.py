@@ -9,8 +9,7 @@ class PlotGraph:
         self.y_label = y_label
 
     def draw(self, data, format="", output=""):
-        if data.ndim == 1:
-            plt.plot(data.get_values(), format)
+        plt.plot(data, format)
         plt.title(self.title)
         plt.xlabel(self.x_label)
         plt.ylabel(self.y_label)
