@@ -1,4 +1,5 @@
 import argparse
+
 import PlotGraph
 import dataHandler
 
@@ -14,7 +15,6 @@ if __name__ == "__main__":
     parser.add_argument('-p','--plot', help='Create a plot figure', action='store_true', default=False)
 
     # Input options
-    #parser.add_argument('integers', help='a list of integers to plot', type=int, nargs='+')
     parser.add_argument('--csv', help='input and parse a csv file using the separator', nargs=2, metavar=('CSVFILE','SEPARATOR'), default=("",","))
 
     # Customization options
@@ -26,18 +26,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # input retrieve
-    if args.verbose:
-        print("Parsing CSV file")
     if args.csv[0] != "":
-        data = dataHandler.importFromCSV(args.csv[0],args.csv[1])
+        data = dataHandler.readFromCSV(args.csv[0],args.csv[1])
+    else:
+        data = dataHandler.readFromStdin()
 
     # figure creation
-    if(args.verbose):
-        print("Checking graph type")
-    if(args.plot):
-        fig = PlotGraph.PlotGraph(args.title, args.xlabel, args.ylabel)
-        if(args.verbose):
-            print("Drawing figure.")
-        fig.draw(data, args.format, args.save)
-    if(args.verbose):
-        print("Closing.")
+    fig = PlotGraph.PlotGraph(args.title, args.xlabel, args.ylabel)
+    fig.draw(data, args.format, args.save)
