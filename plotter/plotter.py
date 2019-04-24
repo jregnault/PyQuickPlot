@@ -22,6 +22,7 @@ if __name__ == "__main__":
     parser.add_argument('-t','--title', help='set the title of the figure', default="")
     parser.add_argument('--xlabel', help='set the x axis label in the figure', default="")
     parser.add_argument('--ylabel', help='set the y axis label in the figure', default="")
+    parser.add_argument('-l','--legend', help='show the legend in the figure', action='store_true', default=False)
 
     args = parser.parse_args()
 
@@ -32,5 +33,5 @@ if __name__ == "__main__":
         data = dataHandler.readFromStdin()
 
     # figure creation
-    fig = PlotGraph.PlotGraph(args.title, args.xlabel, args.ylabel)
+    fig = PlotGraph.PlotGraph(args.legend, args.title, args.xlabel, args.ylabel)
     fig.draw(data, args.format, args.save)
