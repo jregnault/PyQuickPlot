@@ -11,4 +11,10 @@ def readFromCSV(filename,separator):
                 return np.array([[float(e) for e in row] for row in csv.reader(file, delimiter=separator, quoting=csv.QUOTE_NONE)])
 
 def readFromStdin():
-        return np.fromstring(sys.stdin.buffer.read(-1))
+        data = np.empty(1)
+        while 1:
+                line = np.fromstring(sys.stdin.readline())
+                if line is None:
+                        return data
+                else:
+                        data = np.concatenate(data, line)
