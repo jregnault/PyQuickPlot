@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import pandas as pd
 
 class PlotGraph:
 
@@ -10,7 +9,10 @@ class PlotGraph:
         self._legend = legend
 
     def draw(self, data, format="", output=""):
-        plt.plot(data, format)
+        if len(data) == 1:
+            plt.plot(data[0], format)
+        else:
+            plt.plot(data, format)
         plt.title(self._title)
         plt.xlabel(self._x_label)
         plt.ylabel(self._y_label)
