@@ -1,7 +1,9 @@
 import argparse
+import sys
+import logging
 
-import PlotGraph
-import dataHandler
+import PlotGraph as pg
+import dataHandler as dh
 
 if __name__ == "__main__":
     # Parser creation
@@ -26,12 +28,27 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    if args.verbose:
+        # logging config
+        LOG_FORMAT = "[%(asctime)s] [%(name)s] [%(levelname)s] %(message)s"
+        LOG_LEVEL = logging.DEBUG
+        logging.basicConfig(format=LOG_FORMAT, level=LOG_LEVEL)
+
+    __input_file = None
+    __input_separator = ""
+
     # input retrieve
+    logging.info("Retrieving data")
     if args.csv[0] != "":
-        data = dataHandler.readFromCSV(args.csv[0],args.csv[1])
-    else:
-        data = dataHandler.readFromStdin()
+        __input_file = args.csv[0]
+        __input_separator = args.csv[1]
+    
+    data = dh.readFromStream(__input_file, __input_separator)
+    logging.debug(f'data = {data}')
+    logging.debug(f'data length = {len(data)}')
 
     # figure creation
-    fig = PlotGraph.PlotGraph(args.title, args.xlabel, args.ylabel, args.legend)
+    logging.info("Creating figure")
+    fig = pg.PlotGraph(args.title, args.xlabel, args.ylabel, args.legend)
+    logging.info("drawing figure")
     fig.draw(data, args.format, args.save)
