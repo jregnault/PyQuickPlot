@@ -3,7 +3,7 @@ import sys
 import logging
 
 import PlotGraph as pg
-import dataHandler as dh
+import DataHandler as dh
 
 if __name__ == "__main__":
     # Parser creation
