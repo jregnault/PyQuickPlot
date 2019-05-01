@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-class PlotGraph:
+class PlotGraph(object):
 
     def __init__(self, title="plot", x_label="", y_label="", legend=""):
         self._title = title
@@ -8,7 +8,7 @@ class PlotGraph:
         self._y_label = y_label
         self._legend = legend
 
-    def draw(self, data, format="", output=""):
+    def draw(self, data, format=""):
         if len(data) == 1:
             plt.plot(data[0], format)
         else:
@@ -18,6 +18,8 @@ class PlotGraph:
         plt.ylabel(self._y_label)
         if self._legend != "":
             plt.legend([self._legend])
+    
+    def show(self, output=""):
         if output != "":
             plt.savefig(output)
         else:

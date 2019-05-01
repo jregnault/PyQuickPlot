@@ -43,7 +43,7 @@ if __name__ == "__main__":
         __input_file = args.csv[0]
         __input_separator = args.csv[1]
     
-    data = dh.readFromStream(__input_file, __input_separator)
+    data = dh.DataHandler().readFromStream(__input_file, __input_separator)
     logging.debug(f'data = {data}')
     logging.debug(f'data length = {len(data)}')
 
@@ -51,4 +51,5 @@ if __name__ == "__main__":
     logging.info("Creating figure")
     fig = pg.PlotGraph(args.title, args.xlabel, args.ylabel, args.legend)
     logging.info("drawing figure")
-    fig.draw(data, args.format, args.save)
+    fig.draw(data, args.format)
+    fig.show(args.save)
