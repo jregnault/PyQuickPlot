@@ -10,6 +10,7 @@ virtualenv:
 	python3 -m virtualenv .pji
 
 test:
+	pip install -e pyQuickPlot
 	pytest
 
 .PHONY: install userInstall test

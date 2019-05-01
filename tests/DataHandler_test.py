@@ -1,8 +1,9 @@
 import numpy as np
 import DataHandler as dh
 
-class DataHandlerTest(object):
+class TestDataHandler(object):
     def test_readFromStreamWithFile(self):
-        _expected = np.array([[1,2,3][4,5,6]])
-        _data = dh.DataHandler.readFromStream("simple_test.csv",',')
-        assert _expected == _data
+        _expected = np.array([[1,2,3],[4,5,6]])
+        _data = dh.DataHandler.readFromStream("./tests/simple_test.csv",',')
+        for exp, act in zip(_expected, _data):
+            assert list(exp) == list(act)

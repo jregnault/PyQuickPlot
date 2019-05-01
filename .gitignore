@@ -2,6 +2,7 @@
 .pji
 __pycache__
 *.pyc
+*.egg-info
 
 # Visual Studio Code
 .vscode/
