@@ -1,4 +1,4 @@
 matplotlib
 pytest >= 3.4
 pytest-mpl
-pandas
+pytest-cov

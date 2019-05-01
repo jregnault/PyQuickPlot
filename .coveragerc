@@ -1,0 +1,4 @@
+[run]
+omit = 
+    pyQuickPlot/setup.py
+    pyQuickPlot/__init__.py

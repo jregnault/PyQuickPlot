@@ -2,7 +2,11 @@
 .pji
 __pycache__
 *.pyc
+
+# Pytest
 *.egg-info
+.coverage
+htmlcov
 
 # Visual Studio Code
 .vscode/
