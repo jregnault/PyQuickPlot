@@ -10,7 +10,7 @@ class TestPlotGraph(object):
         assert graph._y_label == "y"
         assert graph._legend == "legend"
     
-    @pytest.mark.mpl_image_compare
+    @pytest.mark.mpl_image_compare # flake8: noqa
     def test_drawOneLineInput(self):
         data = np.array([1,2,3])
         graph = pg.PlotGraph()
